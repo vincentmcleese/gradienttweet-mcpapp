@@ -1,0 +1,23 @@
+{
+  "name": "my-project",
+  "dependencies": {
+    "tessl/npm-cloudinary": {
+      "version": "2.7.0"
+    },
+    "tessl/npm-uuid": {
+      "version": "11.1.0"
+    },
+    "tessl/npm-vite": {
+      "version": "7.1.0"
+    },
+    "tessl/npm-zod": {
+      "version": "4.1.1"
+    },
+    "tessl/npm-lodash": {
+      "version": "4.9.0"
+    },
+    "tessl/npm-modelcontextprotocol--sdk": {
+      "version": "1.20.0"
+    }
+  }
+}

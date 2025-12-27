@@ -15,12 +15,17 @@
     "inspector": "mcp-inspector http://localhost:3000/mcp"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.24.3",
+    "@modelcontextprotocol/sdk": "1.20.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@t3-oss/env-core": "^0.13.8",
+    "apify-client": "^2.21.0",
+    "cloudinary": "2.7.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "lodash": "^4.17.21",
+    "lodash": "4.9.0",
+    "nanoid": "^5.1.6",
+    "satori": "^0.18.3",
     "skybridge": "catalog:",
     "vite": "^7.1.11",
     "zod": "^4.1.13"
@@ -31,6 +36,7 @@
     "@types/express": "^5.0.3",
     "@types/lodash": "^4.17.20",
     "@types/node": "^22.15.30",
+    "@types/react": "^19.2.7",
     "nodemon": "^3.1.10",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
