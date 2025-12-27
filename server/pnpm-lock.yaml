@@ -22,7 +22,7 @@ importers:
         version: 2.6.2
       '@t3-oss/env-core':
         specifier: ^0.13.8
-        version: 0.13.10(typescript@5.9.3)(zod@4.2.1)
+        version: 0.13.10(typescript@5.9.3)(zod@3.25.76)
       apify-client:
         specifier: ^2.21.0
         version: 2.21.0
@@ -54,8 +54,8 @@ importers:
         specifier: ^7.1.11
         version: 7.3.0(@types/node@22.19.3)(tsx@4.21.0)
       zod:
-        specifier: ^4.1.13
-        version: 4.2.1
+        specifier: 3.25.76
+        version: 3.25.76
     devDependencies:
       '@modelcontextprotocol/inspector':
         specifier: ^0.17.5
@@ -2370,9 +2370,6 @@ packages:
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
-  zod@4.2.1:
-    resolution: {integrity: sha512-0wZ1IRqGGhMP76gLqz8EyfBXKk0J2qo2+H3fi4mcUP/KtTocoX08nmIAHl1Z2kJIZbZee8KOpBCSNPRgauucjw==}
-
   zustand@5.0.9:
     resolution: {integrity: sha512-ALBtUj0AfjJt3uNRQoL1tL2tMvj6Gp/6e39dnfT6uzpelGru8v1tPOGBzayOWbPJvujM8JojDk3E1LxeFisBNg==}
     engines: {node: '>=12.20.0'}
@@ -3272,10 +3269,10 @@ snapshots:
 
   '@sindresorhus/is@4.6.0': {}
 
-  '@t3-oss/env-core@0.13.10(typescript@5.9.3)(zod@4.2.1)':
+  '@t3-oss/env-core@0.13.10(typescript@5.9.3)(zod@3.25.76)':
     optionalDependencies:
       typescript: 5.9.3
-      zod: 4.2.1
+      zod: 3.25.76
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
@@ -4627,8 +4624,6 @@ snapshots:
       zod: 3.25.76
 
   zod@3.25.76: {}
-
-  zod@4.2.1: {}
 
   zustand@5.0.9(@types/react@19.2.7)(react@18.3.1):
     optionalDependencies:
