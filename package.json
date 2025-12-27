@@ -7,7 +7,7 @@
   "packageManager": "pnpm@10.18.3",
   "scripts": {
     "dev": "pnpm --filter @skybridge-starter/server dev",
-   "build": "pnpm web:build && rm -rf server/dist dist && pnpm --filter=@skybridge-starter/server --prod deploy server/dist && cp -r web/dist server/dist/assets && pnpm --filter=@skybridge-starter/server build && mv server/dist dist",
+   "build": "pnpm web:build && rm -rf server/dist dist && pnpm --filter=@skybridge-starter/server --prod deploy server/dist && cp -r web/dist server/dist/assets && pnpm --filter=@skybridge-starter/server build && cp -r server/dist dist",
     "start": "pnpm server:start",
     "inspector": "pnpm --filter @skybridge-starter/server inspector",
     "server:build": "pnpm --filter @skybridge-starter/server build",
