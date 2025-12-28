@@ -116,7 +116,7 @@
     box-sizing: border-box;
   }
   html, body {
-    @apply w-full m-0 p-0 overflow-x-hidden;
+    @apply w-full m-0 p-0 overflow-hidden;
   }
   body {
     @apply bg-background text-foreground;

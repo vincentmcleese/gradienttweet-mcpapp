@@ -225,7 +225,7 @@ function TweetCard() {
   const bgControls = isDark ? "bg-white/10" : "bg-black/5";
 
   return (
-    <div className="font-sans p-4 w-full min-w-0">
+    <div className="font-sans p-4 w-full min-w-0 overflow-hidden">
       {/* Loading State */}
       {isLoading && (
         <div 
