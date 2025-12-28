@@ -16,8 +16,8 @@ export const env = createEnv({
     CLOUDINARY_API_KEY: z.string().min(1),
     CLOUDINARY_API_SECRET: z.string().min(1),
     
-    // Public URL - for share page links (e.g., ngrok URL in dev)
-    PUBLIC_URL: z.string().url(),
+    // Share page URL - Cloudflare Workers URL for share pages
+    SHARE_PAGE_URL: z.string().url().default("https://gradienttweet.chat"),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,

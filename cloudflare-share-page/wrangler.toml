@@ -1,0 +1,13 @@
+name = "gradient-tweet-share"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# Custom domain
+routes = [
+  { pattern = "gradienttweet.chat", custom_domain = true }
+]
+
+# KV namespace for storing share data
+[[kv_namespaces]]
+binding = "SHARES"
+id = "f7e790eb7b6646299f3bab54bd43ad6d"

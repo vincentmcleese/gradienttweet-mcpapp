@@ -4,7 +4,6 @@ import { fetchTweetAsync } from "./lib/apify.js";
 import * as tweetCache from "./lib/tweet-cache.js";
 import { uploadImage } from "./lib/cloudinary.js";
 import { renderTweetCard } from "./lib/render.js";
-import { shareStore } from "./store.js";
 import { env } from "./env.js";
 
 // Simple logger
@@ -151,19 +150,29 @@ const server = new McpServer(
         const uploadResult = await uploadImage(pngBuffer);
         log.info(`Cloudinary upload complete:`, uploadResult);
 
-        // Store metadata and create share entry
-        const share = shareStore.create({
-          cloudinaryUrl: uploadResult.secureUrl,
+        // Store share data in Cloudflare Worker KV and get short URL
+        const shareData = {
+          img: uploadResult.secureUrl,
           handle,
-          avatarUrl,
-          text,
+          text: text.length > 150 ? text.substring(0, 147) + "..." : text,
           hue,
+        };
+        
+        const baseUrl = env.SHARE_PAGE_URL.replace(/\/$/, '');
+        log.info(`Storing share data at ${baseUrl}/store...`);
+        
+        const storeResponse = await fetch(`${baseUrl}/store`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(shareData),
         });
-        log.info(`Share created with ID: ${share.id}`);
-
-        // Generate shareable URL (remove trailing slash from PUBLIC_URL if present)
-        const baseUrl = env.PUBLIC_URL.replace(/\/$/, '');
-        const shareUrl = `${baseUrl}/share/${share.id}`;
+        
+        if (!storeResponse.ok) {
+          const errorText = await storeResponse.text();
+          throw new Error(`Failed to store share data: ${storeResponse.status} ${errorText}`);
+        }
+        
+        const { url: shareUrl } = await storeResponse.json() as { url: string };
         log.info(`Share URL: ${shareUrl}`);
 
         return {
