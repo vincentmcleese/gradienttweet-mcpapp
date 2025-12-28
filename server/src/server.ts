@@ -179,7 +179,7 @@ const server = new McpServer(
           content: [
             {
               type: "text",
-              text: `Your gradient tweet image is ready to share!\n\n🔗 Share URL: ${shareUrl}\n\nThis link includes Open Graph meta tags, so when you paste it on Twitter, the image will appear automatically.`,
+              text: `Your gradient tweet image is ready to share!\n\n🔗 Share URL: ${shareUrl}\n🖼️ Image URL: ${uploadResult.secureUrl}\n\nThis link includes Open Graph meta tags, so when you paste it on Twitter, the image will appear automatically.`,
             },
           ],
           isError: false,

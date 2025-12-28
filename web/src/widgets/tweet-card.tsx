@@ -189,14 +189,18 @@ function TweetCard() {
   const gradientStart = `hsl(${hue}, 75%, 55%)`;
   const gradientEnd = `hsl(${(hue + 80) % 360}, 85%, 35%)`;
 
-  // Extract share URL from result if available
-  const rawShareUrl = shareResult?.content?.[0]?.type === "text" 
-    ? shareResult.content[0].text.match(/🔗 Share URL: (https?:\/\/[^\s]+)/)?.[1]
+  // Extract share URL and image URL from result if available
+  const resultText = shareResult?.content?.[0]?.type === "text" 
+    ? shareResult.content[0].text 
     : null;
   
-  // Share URL is only valid if hue hasn't changed since generation
+  const rawShareUrl = resultText?.match(/🔗 Share URL: (https?:\/\/[^\s]+)/)?.[1] ?? null;
+  const rawImageUrl = resultText?.match(/🖼️ Image URL: (https?:\/\/[^\s]+)/)?.[1] ?? null;
+  
+  // URLs are only valid if hue hasn't changed since generation
   const isShareValid = rawShareUrl && generatedHue !== null && hue === generatedHue;
   const shareUrl = isShareValid ? rawShareUrl : null;
+  const imageUrl = isShareValid ? rawImageUrl : null;
 
   // Handle Generate button click
   const handleGenerate = () => {
@@ -341,18 +345,33 @@ function TweetCard() {
 
             {/* Action Button - changes based on state */}
             {shareUrl ? (
-              // Share ready: Black "Share on X" button
-              <a
-                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 rounded-lg font-semibold text-sm transition-all bg-black text-white hover:bg-gray-800 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
-              >
-                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-                Share on X
-              </a>
+              // Share ready: Black "Share on X" button + download link
+              <div className="space-y-2">
+                <a
+                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 rounded-lg font-semibold text-sm transition-all bg-black text-white hover:bg-gray-800 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
+                >
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                  Share on X
+                </a>
+                {imageUrl && (
+                  <p className="text-xs text-gray-400 text-left">
+                    or download the image{" "}
+                    <a
+                      href={imageUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-gray-300"
+                    >
+                      here
+                    </a>
+                  </p>
+                )}
+              </div>
             ) : isGeneratePending ? (
               // Generating: Disabled button with spinner
               <button
