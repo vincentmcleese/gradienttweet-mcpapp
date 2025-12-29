@@ -33,6 +33,11 @@ const server = new McpServer(
           .url()
           .describe("REQUIRED: The full URL of the tweet (e.g., https://x.com/elonmusk/status/123456789)"),
       },
+      annotations: {
+        readOnlyHint: false,      // Writes to cache, triggers async fetch
+        openWorldHint: true,      // Makes HTTP requests to Apify API
+        destructiveHint: false,   // Only creates new cache entries, no deletions
+      },
     },
     async ({ tweetUrl }) => {
       log.info(`tweet-card tool called`, { tweetUrl });
@@ -77,6 +82,11 @@ const server = new McpServer(
         "Check the status of a pending tweet fetch request. Used internally by the tweet-card widget to poll for data.",
       inputSchema: {
         requestId: z.string().describe("The request ID from the tweet-card widget"),
+      },
+      annotations: {
+        readOnlyHint: true,       // Only reads from in-memory cache
+        openWorldHint: false,     // No external API calls
+        destructiveHint: false,   // Pure read operation
       },
     },
     async ({ requestId }) => {
@@ -127,6 +137,11 @@ const server = new McpServer(
           .min(0)
           .max(360)
           .describe("The hue value for the gradient (0-360)"),
+      },
+      annotations: {
+        readOnlyHint: false,      // Uploads to Cloudinary, stores in KV
+        openWorldHint: true,      // Makes HTTP requests to Cloudinary and Cloudflare
+        destructiveHint: false,   // Only creates new resources, no deletions
       },
     },
     async ({ text, name, handle, avatarUrl, isVerified, createdAt, hue }) => {
